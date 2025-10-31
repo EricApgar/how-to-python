@@ -1,0 +1,30 @@
+[project]
+name = "py-lib-template"  # The pip install <name>.
+version = "0.1.0"
+description = "Template for repos that are intended to be packaged libraries."
+readme = "README.md"
+requires-python = "~=3.12"
+authors = [
+    { name = "Eric Apgar", email = "TBD" }
+]
+
+urls = {"Homepage" = "https://github.TBD.com"}
+
+dependencies = [
+    "numpy==2.3.2",  # Specifically this version. numpy requires no depenedencies.
+    "pandas~=2.3",  # Any micro version in 2.3 branch (>2.3, <2.4). Pandas has 4 dependencies.
+    "PyYAML>5.1.1",  # Any version greater than 5.1.1.
+    "Pygments",   # Latest version.
+    'python-certifi-win32; platform_system == "Windows"',  # Only if on Windows.
+]
+
+[build-system]
+requires = ["setuptools, "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}  # Important that this folder is the name of the folder where all the files sit under.
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["lib_template*"]  # The import <name>. Defined by the name of the folder under src.
