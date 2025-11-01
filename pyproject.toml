@@ -5,10 +5,10 @@ description = "Template for repos that are intended to be packaged libraries."
 readme = "README.md"
 requires-python = "~=3.12"
 authors = [
-    { name = "Eric Apgar", email = "TBD" }
+    { name = "Eric Apgar" }
 ]
 
-urls = {"Homepage" = "https://github.TBD.com"}
+urls = {"Homepage" = "https://github.com/EricApgar/how-to-python"}
 
 dependencies = [
     "numpy==2.3.2",  # Specifically this version. numpy requires no depenedencies.
@@ -16,7 +16,20 @@ dependencies = [
     "PyYAML>5.1.1",  # Any version greater than 5.1.1.
     "Pygments",   # Latest version.
     'python-certifi-win32; platform_system == "Windows"',  # Only if on Windows.
+    "torch",  # See below for special pytorch considerations.
+    "torchvision"  # See below for special pytorch considerations.
 ]
+
+# Handling specifically if using uv to install.
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true  # Only used for torch packages explicitly mapped below.
+
+# Route just these packages to the PyTorch index.
+[tool.uv.sources]
+torch = { index = "pytorch-cu130" }
+torchvision = { index = "pytorch-cu130" }
 
 [build-system]
 requires = ["setuptools", "wheel"]
